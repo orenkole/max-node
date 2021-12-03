@@ -1,0 +1,21 @@
+.product-form {
+	width: 20rem;
+	max-width: 90%;
+	margin: auto;
+}
+.form-control {
+	margin: 1rem 0;
+	width: 100%;
+}
+.form-control label,
+.form-control input {
+	display: block;
+}
+.form-control input {
+	border: 1px solid grey;
+	font: inherit;
+	border-radius: 2px;
+}
+.form-control input:focus {
+	outline-color: #00695c;
+}
