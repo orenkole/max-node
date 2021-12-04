@@ -1,7 +1,11 @@
 const path = require('path')
+const rootDir = require('../util/path')
 
 exports.get404 = (req, res, next) => {
 	res
 		.status(404)
-		.sendFile(path.join(rootDir, 'views', '404.html'));
+		.render('404', {
+			pageTitle: 'Page not found',
+			path: '404'
+		})
 }
