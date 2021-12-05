@@ -18,7 +18,8 @@ const getProductsFromFile = cb => {
 }
 
 module.exports = class Product {
-	constructor(title, imageUrl, description, price) {
+	constructor(id, title, imageUrl, description, price) {
+		this.id = id;
 		this.title = title;
 		this.imageUrl = imageUrl;
 		this.description = description;
@@ -26,12 +27,19 @@ module.exports = class Product {
 	}
 
 	save() {
-		this.id = crypto.randomBytes(8).toString("hex");
 		getProductsFromFile(products => {
-			products.push(this);
-			fs.writeFile(p, JSON.stringify(products), (err) => {
-				console.log(err)
-			})
+			if (this.id) {
+				const updatedProducts = products.map(product => product.id === this.id ? this : product);
+				fs.writeFile(p, JSON.stringify(updatedProducts), (err) => {
+					console.log(err)
+				})
+			} else {
+				this.id = crypto.randomBytes(8).toString("hex");
+				products.push(this);
+				fs.writeFile(p, JSON.stringify(products), (err) => {
+					console.log(err)
+				})
+			}
 		})
 	}
 
