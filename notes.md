@@ -23,3 +23,38 @@ schemas => rc 'create new scheme' => apply
 we'll create connection pool  
 create file:  
 _max-node/util/database.js_  
+```js
+const mysql = require('mysql2');
+
+const pool = mysql.createPool({
+  host: 'localhost',
+  user: 'root',
+  database: 'node-complete',
+  password: 'some_password'
+})
+
+module.exports = pool.promise();
+```
+
+_max-node/app.js_  
+```js
+db.execute(`SELECT * FROM products`)
+  .then((result) => {
+    console.log(result);
+  })
+  .catch((err) => {
+    console.log(err)
+  });
+```
+![img.png](images-notes/table.png)
+
+## Basic SQL & Creating a Table
+
+![img.png](images-notes/created-table.png)
+
+## Retrieving Data
+
+![img.png](images-notes/retrieving-data.png)
+
+## Fetching Products
+
